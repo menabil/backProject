@@ -1,10 +1,26 @@
 const express = require("express");
 const router = express.Router();
 
-// router.get("/", (req, res) => {
-//   res.send("hello2");
+// router.get("/reg", (req, res) => {
+
 // });
 
+// router.post("/login", (req, res) => {
+//   const { email } = req.body;
+// });
+
+router.post("/sendotp", (req, res) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({
+      success: false,
+      message: "Email is require",
+    });
+  } else {
+  
+  }
+});
 
 /**
  * @openapi
