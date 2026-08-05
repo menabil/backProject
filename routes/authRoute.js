@@ -51,30 +51,23 @@ router.post("/sendotp", async (req, res) => {
   res.json("Done");
 });
 
-/**
- * @openapi
- * /api/users:
- *   get:
- *     summary: Retrieve a list of users
- *     responses:
- *       200:
- *         description: A list of users.
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   id:
- *                     type: integer
- *                     example: 1
- *                   name:
- *                     type: string
- *                     example: John Doe
- */
-router.get("/api/users", (req, res) => {
-  res.json([{ id: 1, name: "John Doe" }]);
+router.post("/login/:email", async (req, res) => {
+  const { email } = req.params;
+  const { otp } = req.body;
+  let exMail = await User.findOne({ email: email });
+  if (exMail.isLogin) {
+    return res.send("Logout koro");
+  }
+  if (!exMail.otp) {
+    return res.send("Calak");
+  }
+
+  if (exMail.otp == otp) {
+    await User.findOneAndUpdate({ email: email }, { otp: "", isLogin: true });
+    res.send("Login");
+  } else {
+    res.send("Otp not match");
+  }
 });
 
 module.exports = router;

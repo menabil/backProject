@@ -12,6 +12,10 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
+  isLogin: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);
