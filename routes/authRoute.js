@@ -4,13 +4,13 @@ const nodemailer = require("nodemailer");
 const otpGenerator = require("otp-generator");
 const User = require("../models/userSchema");
 
-// router.get("/reg", (req, res) => {
 
-// });
 
-// router.post("/login", (req, res) => {
-//   const { email } = req.body;
-// });
+
+
+
+
+
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
