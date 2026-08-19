@@ -2,15 +2,7 @@ const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const otpGenerator = require("otp-generator");
-const User = require("../models/userSchema");
-
-
-
-
-
-
-
-
+const { User } = require("../models/userSchema");
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -67,6 +59,15 @@ router.post("/login/:email", async (req, res) => {
     res.send("Login");
   } else {
     res.send("Otp not match");
+  }
+});
+
+// Logout
+router.post("/logout", async (req, res) => {
+  const { email } = req.body;
+  let existingUser = await User.findOne({ email: email });
+  if (existingUser.isLogin) {
+    await User.findOneAndUpdate({ email: email }, { otp: "", isLogin: false });
   }
 });
 
