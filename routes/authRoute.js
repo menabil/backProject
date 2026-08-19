@@ -71,4 +71,36 @@ router.post("/logout", async (req, res) => {
   }
 });
 
+// senarioy
+// Todo:
+// Mail db te ase kina - done
+// jodi thake ta hole pass deta bolo - done
+// na thakle pass set korte bolo and db te save koro
+// handel wrong pass - done
+
+// router.post("/login", async (req, res) => {
+//   const { email, pass } = req.body;
+//   let exMail = await User.findOne({ email: email });
+//   if (exMail) {
+//     if (pass) {
+//       if (pass == exMail.pass) {
+//         res.send("Login");
+//       } else {
+//         res.send("Wrong pass");
+//       }
+//     } else {
+//       res.send("Password den ");
+//     }
+//   } else {
+//     if (pass) {
+//       let user = new User({
+//         email: email,
+//         pass: pass,
+//       }).save();
+//     } else {
+//       res.send("password create koren");
+//     }
+//   }
+// });
+
 module.exports = router;
