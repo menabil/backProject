@@ -33,4 +33,25 @@ const sendOtp = async (req, res) => {
   res.json("Done");
 };
 
-module.exports = { sendOtp };
+const login = async (req, res) => {
+  const { email } = req.params;
+  const { otp } = req.body;
+
+  let exMail = await User.findOne({ email: email });
+
+  if (exMail.isLogin) {
+    return res.send("Logout koro");
+  }
+  if (!exMail.otp) {
+    return res.send("Calak");
+  }
+
+  if (exMail.otp == otp) {
+    await User.findOneAndUpdate({ email: email }, { otp: "", isLogin: true });
+    res.send("Login");
+  } else {
+    res.send("Otp not match");
+  }
+};
+
+module.exports = { sendOtp, login };
