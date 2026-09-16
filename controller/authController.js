@@ -1,4 +1,6 @@
 const User = require("../models/userSchema");
+const otpGenerator = require("otp-generator");
+const transporter = require("../utils/transporter");
 
 const sendOtp = async (req, res) => {
   const { email } = req.body;
